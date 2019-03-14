@@ -21,7 +21,7 @@ public class EmployeTest {
     }
 
     @Test
-    public void testGetNombreAnneeAncienneteAfter(){
+    public void testGetNombreAnneeAnciennetePlus2(){
         //Given
         Employe employe = new Employe();
         employe.setDateEmbauche(LocalDate.now().plusYears(2L));
@@ -34,7 +34,7 @@ public class EmployeTest {
     }
 
     @Test
-    public void testGetNombreAnneeAncienneteBefore(){
+    public void testGetNombreAnneeAncienneteMoins4(){
         //Given
         Employe employe = new Employe();
         employe.setDateEmbauche(LocalDate.now().minusYears(4L));
