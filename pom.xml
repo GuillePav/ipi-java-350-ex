@@ -145,8 +145,8 @@
 					</targetTests>
 				</configuration>
 			</plugin>
-			<plugin>
-				<!--<groupId>com.thoughtworks.gauge.maven</groupId>
+			<!--<plugin>
+				<groupId>com.thoughtworks.gauge.maven</groupId>
 				<artifactId>gauge-maven-plugin</artifactId>
 				<version>1.3.4</version>
 				<executions>
