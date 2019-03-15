@@ -65,15 +65,14 @@ public class EmployeTest {
     @ParameterizedTest
     @CsvSource({
 
-            "1, 'T12345', 0, 1.0, 1000.0",
-            "1, 'T12345', 2, 0.5, 600.0",
             "1, 'T12345', 2, 1.0, 1200.0",
             "2, 'T12345', 0, 1.0, 2300.0",
-            "2, 'T12345', 1, 1.0, 2400.0",
+            "2, 'T12345', 3, 1.0, 2600.0",
+            "1, 'T12345', 2, 0.5, 600.0",
             "1, 'M12345', 0, 1.0, 1700.0",
-            "1, 'M12345', 5, 1.0, 2200.0",
-            "2, 'M12345', 0, 1.0, 1700.0",
-            "2, 'M12345', 8, 1.0, 2500.0"
+            "1, 'M12345', 1, 1.0, 1800.0"
+
+
     })
     public void getPrimeAnnuelle(Integer performance, String matricule, Long nbYearsAnciennete, Double tempsPartiel, Double primeAnnuelle){
 
