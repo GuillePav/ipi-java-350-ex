@@ -1,9 +1,13 @@
-// Travailler sur la branche eval !
-// Pour finir, faire une pullRequest d'eval sur baseeval, et affecter PJ.
-// Pour Pitest :
-// clean install
-// org.pitest:pitest-maven:mutationCoverage
-// Pour lancer gauge : mvn test.
+/*
+ Travailler sur la branche eval !
+ Pour finir, faire une pullRequest d'eval sur baseeval, et affecter PJ.
+ Pour Pitest :
+ clean install
+ org.pitest:pitest-maven:mutationCoverage
+ Pour lancer gauge : mvn test.
+ Adresse de la pull Request : https://github.com/GuillePav/ipi-java-350-ex/pull/1 (à envoyer à une personne
+ pour la revue de code et à PJ A LA FIN.)
+ */
 
 package com.ipiecoles.java.java350.model;
 
