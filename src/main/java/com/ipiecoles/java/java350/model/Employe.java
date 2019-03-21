@@ -1,3 +1,10 @@
+// Travailler sur la branche eval !
+// Pour finir, faire une pullRequest d'eval sur baseeval, et affecter PJ.
+// Pour Pitest :
+// clean install
+// org.pitest:pitest-maven:mutationCoverage
+// Pour lancer gauge : mvn test.
+
 package com.ipiecoles.java.java350.model;
 
 import javax.persistence.Entity;
@@ -121,7 +128,7 @@ public class Employe {
     }
 
     //Augmenter salaire
-    //public void augmenterSalaire(double pourcentage){}
+    public void augmenterSalaire(double pourcentage){}
 
     public Long getId() {
         return id;
@@ -236,3 +243,4 @@ public class Employe {
         return Objects.hash(id, nom, prenom, matricule, dateEmbauche, salaire, performance);
     }
 }
+
