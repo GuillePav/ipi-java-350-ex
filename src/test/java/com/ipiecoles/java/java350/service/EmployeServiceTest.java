@@ -141,4 +141,23 @@ public class EmployeServiceTest {
         EmployeException e = Assertions.assertThrows(EmployeException.class, () -> employeService.embaucheEmploye(nom, prenom, poste, niveauEtude, tempsPartiel));
         Assertions.assertEquals("Limite des 100000 matricules atteinte !", e.getMessage());
     }
+
+    @Test
+    public void testCalculPerformanceCommercial() throws EmployeException {
+        //Given
+        String matricule = "C00002";
+        Long caTraite = Long.valueOf(10000);
+        Long objectifCa = Long.valueOf(15000);
+
+        //When
+        employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
+
+        //Then
+        ArgumentCaptor<Employe> performanceArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
+        verify(employeRepository, times(1)).save(performanceArgumentCaptor.capture());
+
+        //10000 est inférieur à plus de 20% de 15000, donc performance de base
+        Assertions.assertEquals(1, performanceArgumentCaptor.getValue().getPerformance().intValue());
+    }
+
 }
