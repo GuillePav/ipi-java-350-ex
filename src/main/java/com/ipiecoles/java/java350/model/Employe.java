@@ -1,6 +1,7 @@
 /*
  Travailler sur la branche eval !
  Pour finir, faire une pullRequest d'eval sur baseeval, et affecter PJ.
+ Commiter et pusher : git push origin eval.
  Pour Pitest :
  clean install
  org.pitest:pitest-maven:mutationCoverage
@@ -86,15 +87,16 @@ public class Employe {
     }
 
     public Integer getNbRtt(LocalDate d){
-        int i1 = d.isLeapYear() ? 365 : 366;
-        int var = 104;
+        int nbRtt;
+        int nbJoursAnnee = d.isLeapYear() ? 366 : 365;
+        int nbJoursReposAnnee = 104;
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-            case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;
-            case FRIDAY: if(d.isLeapYear()) var =  var + 2; else var =  var + 1;
-            case SATURDAY: var = var + 1; break;
+            case THURSDAY: if(d.isLeapYear()) nbJoursReposAnnee =  nbJoursReposAnnee + 1; break;
+            case FRIDAY: if(d.isLeapYear()) nbJoursReposAnnee =  nbJoursReposAnnee + 2; else nbJoursReposAnnee =  nbJoursReposAnnee + 1; break;
+            case SATURDAY: nbJoursReposAnnee = nbJoursReposAnnee + 1; break;
         }
-        int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+        int nbJoursFeries = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
+        return nbRtt = (int) Math.ceil((nbJoursAnnee - Entreprise.NB_JOURS_MAX_FORFAIT - nbJoursReposAnnee - Entreprise.NB_CONGES_BASE - nbJoursFeries) * tempsPartiel);
     }
 
     /**
@@ -131,8 +133,23 @@ public class Employe {
         return Math.round(prime * this.tempsPartiel * 100)/100.0;
     }
 
+
+    /** Calcul de l'augmentation de salaire selon la règle :
+     * On fera l'hypothèse que si le pourcentage d'augmentation est nul, négatif ou supérieur à 1
+     * (donc 100%), alors le salaire restera le même.
+     * @param pourcentage
+     * @return le salaire augmenté
+     */
     //Augmenter salaire
-    public void augmenterSalaire(double pourcentage){}
+
+    public Double augmenterSalaire(double pourcentage){
+        Double salaireAugmente = Math.ceil(this.getSalaire() * (1 + pourcentage * 100)/100.0)*10;
+
+        if(pourcentage <= 0.0 || pourcentage > 1.0){
+            salaireAugmente = this.getSalaire();
+        }
+            return salaireAugmente;
+    }
 
     public Long getId() {
         return id;
