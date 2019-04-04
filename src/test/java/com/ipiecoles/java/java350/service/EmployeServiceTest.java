@@ -2,6 +2,7 @@ package com.ipiecoles.java.java350.service;
 
 import com.ipiecoles.java.java350.exception.EmployeException;
 import com.ipiecoles.java.java350.model.Employe;
+import com.ipiecoles.java.java350.model.Entreprise;
 import com.ipiecoles.java.java350.model.NiveauEtude;
 import com.ipiecoles.java.java350.model.Poste;
 import com.ipiecoles.java.java350.repository.EmployeRepository;
@@ -143,11 +144,12 @@ public class EmployeServiceTest {
     }
 
     @Test
-    public void testCalculPerformanceCommercial() throws EmployeException {
+    public void testCalculPerformanceCommercialUnder20() throws EmployeException {
         //Given
-        String matricule = "C00002";
-        Long caTraite = Long.valueOf(10000);
+        String matricule = "C00001";
+        Long caTraite = Long.valueOf(1000);
         Long objectifCa = Long.valueOf(15000);
+        when(employeRepository.findByMatricule("C00001")).thenReturn(new Employe("Doe", "John", "C00001", LocalDate.now(), 1700.0, 1, 1.0));
 
         //When
         employeService.calculPerformanceCommercial(matricule, caTraite, objectifCa);
@@ -156,7 +158,7 @@ public class EmployeServiceTest {
         ArgumentCaptor<Employe> performanceArgumentCaptor = ArgumentCaptor.forClass(Employe.class);
         verify(employeRepository, times(1)).save(performanceArgumentCaptor.capture());
 
-        //10000 est inférieur à plus de 20% de 15000, donc performance de base
+        //1000 est inférieur à plus de 20% de 15000, donc performance de base
         Assertions.assertEquals(1, performanceArgumentCaptor.getValue().getPerformance().intValue());
     }
 
