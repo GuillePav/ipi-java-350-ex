@@ -87,16 +87,18 @@ public class Employe {
     }
 
     public Integer getNbRtt(LocalDate d){
-        int nbRtt;
         int nbJoursAnnee = d.isLeapYear() ? 366 : 365;
         int nbJoursReposAnnee = 104;
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
             case THURSDAY: if(d.isLeapYear()) nbJoursReposAnnee =  nbJoursReposAnnee + 1; break;
             case FRIDAY: if(d.isLeapYear()) nbJoursReposAnnee =  nbJoursReposAnnee + 2; else nbJoursReposAnnee =  nbJoursReposAnnee + 1; break;
             case SATURDAY: nbJoursReposAnnee = nbJoursReposAnnee + 1; break;
+            default:
+                break;
         }
         int nbJoursFeries = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return nbRtt = (int) Math.ceil((nbJoursAnnee - Entreprise.NB_JOURS_MAX_FORFAIT - nbJoursReposAnnee - Entreprise.NB_CONGES_BASE - nbJoursFeries) * tempsPartiel);
+        int nbRtt = (int) Math.ceil((nbJoursAnnee - Entreprise.NB_JOURS_MAX_FORFAIT - nbJoursReposAnnee - Entreprise.NB_CONGES_BASE - nbJoursFeries) * tempsPartiel);
+        return nbRtt;
     }
 
     /**
